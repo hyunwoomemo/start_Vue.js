@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p v-bind:id="uuid" v-bind:class="name">{{ num}}</p>
+    <p>{{ doubleNum }}</p>
+    <div v-if="loading">
+      Loading...
+    </div>
+    <div v-else>
+      test user has been logged in
+    </div>
+    <div v-show="loading">
+      Loading...
+    </div>
+    <!-- <input type="text" v-bind:value="inputValue" @input="handleChange($event.target.value)"> -->
+    <input type="text" v-model="inputValue"> 
+    <p>{{inputValue}}</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num: 10,
+        uuid: 'abc1234',
+        name: 'text-blue',
+        loading: true,
+        inputValue: '',
+      },
+      computed: {
+        doubleNum: function() {
+          return this.num * 2
+        },
+      },
+      methods: {
+        handleChange: function(e) {
+          this.inputValue = e;
+        }
+      },
+      mounted() {
+        setTimeout(() => {
+          this.loading = !this.loading
+        }, 2000)
+      }
+    })
+  </script>
+</body>
+</html>
